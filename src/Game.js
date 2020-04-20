@@ -50,9 +50,6 @@ class Game extends React.Component {
         
 
         const moves = history.map((step, move) => {
-            console.log(step.step);
-            
-
             const desc = move 
                 ? 'Перейти к ходу №' + move
                 : "К началу игры";
