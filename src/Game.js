@@ -8,6 +8,7 @@ class Game extends React.Component {
         this.state = {
             history: [{
                 squares: Array(9).fill(null),
+                step: null,
             }],
             stepNumber: 0,
             xIsNext: true,
@@ -21,10 +22,13 @@ class Game extends React.Component {
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
+        
+        
         squares[i] = this.state.xIsNext ? "X" : "O";
         this.setState({
                 history: history.concat([{
                 squares: squares,
+                step: i,
             }]),
             stepNumber: history.length,            
             xIsNext: !this.state.xIsNext,
@@ -42,16 +46,68 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
+       // const step = current.step;        
+        
 
         const moves = history.map((step, move) => {
+            console.log(step.step);
+            
+
             const desc = move 
                 ? 'Перейти к ходу №' + move
                 : "К началу игры";
             return (
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
+                </li>               
             ) 
+        })
+
+        const table = history.map((step) =>{
+            const s = step.step;
+            let tables;        
+            if (s === 0 || s === 3 || s === 6) {
+                switch (s) {
+                    case 0:
+                        tables = '1ый столбец, 1ая строка';
+                        break;
+                    case 3:
+                        tables = '1ый столбец, 2ая строка';
+                        break;                
+                    default:
+                        tables = '1ый столбец, 3ая строка';
+                        break;
+                }
+            } else if (s === 1 || s === 4 || s === 7) {
+                switch (s) {
+                    case 1:
+                        tables = '2ой столбец, 1ая строка';
+                        break;
+                    case 4:
+                        tables = '2ой столбец, 2ая строка';
+                        break;                
+                    default:
+                        tables = '2ой столбец, 3ая строка';
+                        break;
+                }
+            } else if (s === 2 || s === 5 || s === 8) {
+                switch (s) {
+                    case 2:
+                        tables = '3ий столбец, 1ая строка';
+                        break;
+                    case 5:
+                        tables = '3ий столбец, 2ая строка';
+                        break;                
+                    default:
+                        tables = '3ий столбец, 3ая строка';
+                        break;
+                }
+            } else {
+                tables = 'Начало игры';
+            }
+            return (
+                <li key={s}>{tables}</li>
+            )
         })
 
         let status;
@@ -71,7 +127,10 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <ol>{moves}</ol>                    
+                </div>
+                <div className='info-table'>
+                    <ul>{table}</ul>
                 </div>
             </div>
         );

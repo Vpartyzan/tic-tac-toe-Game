@@ -3,9 +3,10 @@ body {
     margin: 20px;
   }
   
-  ol, ul {
+  ol {
     padding-left: 30px;
   }
+
   
   .board-row:after {
     clear: both;
@@ -48,4 +49,17 @@ body {
   .game-info {
     margin-left: 20px;
   }
+
+  .info-table {
+    margin-left: 20px;
+  }
   
+  .info-table ul {
+    padding-left: 30px;
+    list-style-type: none;
+    margin-block-start: 2em;
+  }
+
+  .info-table li {
+    padding: 2.32px;
+  }
