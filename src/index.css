@@ -36,6 +36,11 @@ body {
   .square:focus {
     outline: none;
   }
+
+  .square:hover {
+    background: grey;
+    color: black;    
+  }
   
   .kbd-navigation .square:focus {
     background: #ddd;
@@ -48,6 +53,10 @@ body {
   
   .game-info {
     margin-left: 20px;
+  }
+
+  .game-info div {
+    margin-left: 50px
   }
 
   .info-table {
