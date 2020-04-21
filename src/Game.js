@@ -40,13 +40,13 @@ class Game extends React.Component {
             stepNumber: step,
             xIsNext: (step % 2) === 0,
         });
-    }
-
+    }    
+    
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-       // const step = current.step;        
+        const step = this.state.stepNumber;        
         
 
         const moves = history.map((step, move) => {
@@ -105,14 +105,16 @@ class Game extends React.Component {
             return (
                 <li key={s}>{tables}</li>
             )
-        })
+        })        
 
         let status;
         if (winner) {
             status = 'Win ' + winner;
+        } else if (step === 9) {
+            status = 'Ничья';
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? "X" : "O");
-        }
+        } 
 
         return (
             <div className="game">
